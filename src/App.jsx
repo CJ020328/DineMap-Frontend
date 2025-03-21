@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import MapView from "./components/MapView";
 import ChatUI from "./components/ChatUI";
+import _ from 'lodash';
 
 export default function App() {
   // 存储多店 IDs

@@ -1,6 +1,7 @@
 // src/components/ChatUI.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { config } from '../config';
+import _ from 'lodash';
 
 export default function ChatUI({ onChatResult }) {
   const [messages, setMessages] = useState([

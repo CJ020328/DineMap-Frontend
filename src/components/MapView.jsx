@@ -12,6 +12,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { config } from '../config';
+import _ from 'lodash';
 
 // 修复 Leaflet 默认图标
 delete L.Icon.Default.prototype._getIconUrl;
@@ -79,10 +80,11 @@ export default function MapView({
     fetch(`${config.API_URL}/outlets`)
       .then((response) => response.json())
       .then((data) => {
-        setOutlets(data);
-        // 如果需要保存所有数据，取消下一行的注释
-        // setAllOutlets(data);
+        console.log("🔥 [MapView] Fetched data from API:", data);
+        const outletList = Array.isArray(data?.outlets) ? data.outlets : [];
+        setOutlets(outletList);
       })
+      
       .catch((err) => {
         console.error("Error fetching outlets:", err);
       })
@@ -90,6 +92,7 @@ export default function MapView({
         setLoading(false);
       });
   }, []);
+  
 
   // ================ 2) 计算距离 5KM ================
   function getDistance(lat1, lon1, lat2, lon2) {
